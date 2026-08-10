@@ -1,0 +1,29 @@
+# Copy into any repo's own .github/workflows/ — free, GitHub-maintained.
+# Multi-language linter (Markdown, YAML, JSON, shell, Python, Go, JS/TS, Dockerfile, etc.)
+# in a single action — useful catch-all before per-language tooling is worth setting up.
+# Docs: https://github.com/github/super-linter
+name: Lint
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v7
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: false
+          FILTER_REGEX_EXCLUDE: ".*docs.zarishsphere-template/.*"

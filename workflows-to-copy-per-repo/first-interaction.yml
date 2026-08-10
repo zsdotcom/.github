@@ -1,0 +1,30 @@
+# Copy into any repo's own .github/workflows/ — free, official GitHub action.
+# Auto-welcomes first-time issue/PR authors. Add once outside contributors start showing up;
+# no value yet on a solo-maintainer repo.
+# Docs: https://github.com/actions/first-interaction
+name: Welcome first-time contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: >
+            Thanks for opening your first issue in ZarishSphere! A maintainer will take a look
+            soon — in the meantime, see CONTRIBUTING.md for how this repo's review process works.
+          pr-message: >
+            Thanks for your first PR to ZarishSphere! Please make sure the checklist in the PR
+            template is filled out — CI (labels, semantic title check, security scans) will run
+            automatically and a maintainer will review shortly.

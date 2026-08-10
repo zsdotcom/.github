@@ -1,0 +1,25 @@
+# Copy into any repo's own .github/workflows/ — free, Apache-2.0, Google-maintained.
+# Reads Conventional Commits (see semantic-pr.yml) and keeps a standing "Release PR" with an
+# auto-generated CHANGELOG. Merging that PR tags + publishes a GitHub Release automatically.
+# Zero manual versioning once this + semantic-pr.yml are both in place.
+# Docs: https://github.com/googleapis/release-please-action
+name: release-please
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          # "simple" works for most repos with a single package/version at the root.
+          # Switch to "node", "go", "python", etc. if the repo has language-specific
+          # manifest files release-please should bump (package.json, go.mod, ...).
+          release-type: simple

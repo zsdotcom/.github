@@ -7,7 +7,7 @@
 # and to have at least Read access to this repo, or GitHub will silently skip the assignment.
 
 # Fallback: any file not matched below goes to core-maintainers.
-*                       @zsdotcom/core-maintainers
+*                       @zsdotcom/maintainers
 
 # Docs-specific ownership, only relevant in docs.zarishsphere.
 /content/               @zsdotcom/docs-team
